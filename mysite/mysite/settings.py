@@ -33,17 +33,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-#S3 BCUKETS CONFIG
-AWS_ACCESS_KEY_ID = ''
-AWS_SECERT_ACCESS_KEY = ''
-AWS_STORAGE_BUCKET_NAME = 'safereserve-bucket'
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAUTL_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,7 +51,7 @@ INSTALLED_APPS = [
     'reservations',
     'myreview',
 
-    'storage',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -144,20 +133,39 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+#S3 BCUKETS CONFIG
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = 'safereserve-bucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_DEFAULT_ACL = 'public-read'
 
-STATIC_URL = '/static/'
-
+AWS_LOCATION = 'static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+# MEDIA CONFIG
+AWS_S3_FILE_OVERWRITE = False
+DEFAULT_FILE_STORAGE = 'mysite.storages.MediaStore'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 
 LOGIN_URL = '/login/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
