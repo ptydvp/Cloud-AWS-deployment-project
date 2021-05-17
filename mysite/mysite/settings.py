@@ -25,7 +25,8 @@ SECRET_KEY = 'g)to(z&px$v!yqxjthmcp09w96v$!l_8ya%xp(ahv0e!kp_77k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#EC2
+ALLOWED_HOSTS = ['35.153.131.216']
 
 
 # Application definition
@@ -84,10 +85,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'LetsEat',
+        'NAME': 'safereserve',
         'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'PASSWORD': 'safereservedbRDS',
+        'HOST': 'safereserve-db.co08z1ygs8vo.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -143,3 +144,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+#S3 BCUKETS CONFIG
+# AWS_ACCESS_KEY_ID = ''
+# AWS_SECERT_ACCESS_KEY = ''
+# AWS_STORAGE_BUCKET_NAME = 'safereserve-bucket'
+
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAUTL_ACL = None
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
