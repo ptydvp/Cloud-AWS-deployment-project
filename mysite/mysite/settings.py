@@ -26,10 +26,10 @@ SECRET_KEY = 'g)to(z&px$v!yqxjthmcp09w96v$!l_8ya%xp(ahv0e!kp_77k'
 DEBUG = True
 
 #EC2-safereserve - 1
-# ALLOWED_HOSTS = ['35.153.131.216']
+ALLOWED_HOSTS = ['35.153.131.216']
 
 #EC2-safereserve - 2
-ALLOWED_HOSTS = ['54.147.118.129']
+# ALLOWED_HOSTS = ['54.147.118.129']
 
 # ALLOWED_HOSTS = []
 
