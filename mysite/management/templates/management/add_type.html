@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container jumbotron">
+        <h1>เพิ่มข้อมูลสินค้า</h1>
+        <br/>
+            <!-- Submit to Type_add view -->
+        <form method="POST" action="{% url 'Type_add' %}">
+        {% csrf_token %}
+            
+                <div class="form-group col-3">
+                    <label for="name">ชื่อประเภท:</label>
+                    <input type="text" class="form-control" name="type_name" id="type_name" value="{{restaurant_type.type_name}}" required>
+                </div>
+            {% csrf_token %}
+            {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+            <button type="submit" class="btn btn-primary ml-3">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

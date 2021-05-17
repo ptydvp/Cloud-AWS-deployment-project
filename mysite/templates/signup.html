@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+    <br/><br/>
+        <h1>Register</h1>
+        <br/><br/>
+        <form name ="myForm" method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="first_name">Firstname:</label>
+                <input type="text" class="form-control ml-3" id="first_name" name="first_name" value="{{first_name}}" required>
+            </div>            
+
+            <div class="form-group">
+                <label for="last_name" >Lastname:</label>
+                <input type="text" class="form-control ml-3" id="last_name" 
+                    name="last_name" value="{{last_name}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">username:</label>
+                <input type="text" class="form-control ml-3" id="username" 
+                    name="username" value="{{username}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control ml-3" id="password1" name="password1" value="{{password1}}" required>
+                <div class="form-group"><p><p><input type="checkbox" onclick="myFunction()"> Show Password</div>
+                <script> function myFunction() {
+                        var x = document.getElementById("password1");
+                        if (x.type === "password") {
+                        x.type = "text";
+                        } else { x.type = "password";}} </script>
+            </div>
+
+            <div class="form-group">
+                <label for="password2">Re-password:</label>
+                <input type="password" class="form-control ml-3" id="password2" name="password2" value="{{password2}}" required>
+                <div class="form-group"><p><p><input type="checkbox" onclick="myFunction1()"> Show Password</div>
+                <script> function myFunction1() {
+                        var x = document.getElementById("password2");
+                        if (x.type === "password") {
+                        x.type = "text";
+                        } else { x.type = "password";}} </script>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control ml-3" id="email" 
+                    name="email" value="{{email}}" required>
+            </div>
+            <label for="password2">เข้าใช้งานระบบแบบ:</label>
+            <select id="role" name="role" required>
+                <option value="yes" id="yes">Store</option>
+                <option value="no" id="no" selected >customer</option>
+            </select>            
+            <div align='center'>
+            <button type="submit" class="btn btn-primary ml-3" href="{% url 'login' %}">Sign Up</button>
+            </div>
+            <div class="container signin">
+            <br>
+                <p>Already have an account? <a href="{% url 'login' %}">Sign in</a>.</p>
+                </div>
+                </form>        
+                {% comment %} <script>function Group1(checkbox) {
+                var checkboxes = document.getElementsByName('check')
+                checkboxes.forEach((item) => {
+                if (item !== checkbox) item.checked = false
+                                })}
+                </script>  {% endcomment %}
+                <br/><br/>
+        </div>
+{% endblock %}

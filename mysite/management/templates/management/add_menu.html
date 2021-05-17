@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    <br>
+    <div class="container jumbotron">
+        <h1>เพิ่มเมนูอาหาร</h1>
+        <br/>
+        {% comment %} {% if Type.id %}
+            <!-- Submit to class_update view -->
+            <form method="POST" action="{% url 'managementType' %}" enctype="multipart/form-data">
+        {% else %}
+            <!-- Submit to class_add view --> {% endcomment %}
+        <form method="POST" action="{% url 'Add_menu' restauranted.id%}" enctype="multipart/form-data" >
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">ชื่อเมนู:</label>
+                    <input type="text" class="form-control " name="menu_name" id="menu_name" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">รูปภาพ:</label>
+                    <input type="file" name="picture" id="picture" accept="image/*" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">ราคา:</label>
+                    <input type="text" class="form-control" name="menu_price" id="menu_price" required>
+                </div>
+            </div>
+            {% comment %} <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="name">ของร้าน:</label>
+                        <select id="restaurant_id" name="restaurant_id">
+                                <option value="{{ restauranted.id }}">{{ restauranted.id }}</option>
+                        </select>
+                    </div>
+            </div> {% endcomment %}
+            {% csrf_token %}
+            {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+            <button type="submit" class="btn btn-primary ml-3">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

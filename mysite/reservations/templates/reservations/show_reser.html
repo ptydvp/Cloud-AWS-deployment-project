@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <br>
+
+    <div class="heading-title text-center">
+						<h2>ยอดการจองของร้านคุณ</h2>
+						{% if myreser.count == 0 %}
+							<p>ยังไม่มีการจอง</p>
+						{% endif %}
+	</div>
+    <div class="jumbotron">
+		<div class="container">
+            {% for rs in myreser %}
+			<div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                        <img src="{{ rs.user.profile.image.url }}" class="img-fluid" alt="">
+                </div>
+				<div class="col-lg-8 col-md-8 col-sm-12 text-center">
+					<div class="inner-column">
+						<h1>คำจองของคุณ : {{ rs.reser_as }}</h1>
+						<h2 class="text-danger">มาทั้งหมด : <span style="color:black;">{{ rs.person }} ท่าน</span></h2>
+						<h2 class="text-danger">เบอร์ติดต่อ : <span style="color:black;">{{ rs.contact }}</span></h2>
+                        <h2 class="text-danger">จองร้านวันที่ : <span style="color:black;">{{ rs.reser_day }}</span></h2>
+                        <h2 class="text-danger">เวลา : <span style="color:black;">{{ rs.reser_time }}</span></h2>
+                        <h2 class="text-danger">ร้าน : <span style="color:black;">{{ rs.restaurant.restaurant_name }}</span></h2>
+						{% if rs.reservation_accepted.reser_status == 'Accepted' %}
+							<h2 class="text-danger">สถานะ : <span style="color:green;">ยอมรับการจองแล้ว</span></h2>
+						{% elif rs.reservation_accepted.reser_status == 'Rejected' %}
+							<h2 class="text-danger">สถานะ : <span style="color:red;">ปฎิเสทการจองไปแล้ว</span></h2>
+						{% elif rs.reservation_accepted.reser_status == 'Cancel' %}
+							<h2 class="text-danger">สถานะ : <span style="color:red;">ถูกยกเลิกไปแล้ว</span></h2>
+						{% else %}
+							<h2 class="text-danger">สถานะ : <span style="color:black;">รอดำเนินการ</span></h2>
+						{% endif %}
+						{% if rs.reservation_accepted.reser_status == 'Pending' %}
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url "reservation_accepted" reservation_id=rs.id %}">ยอมรับการจอง</a>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url "reservation_rejected" reservation_id=rs.id %}">ปฎิเสทการจอง</a>
+						{% endif %}
+					</div>
+				</div>
+			
+			</div>
+			<hr>
+            {% endfor %}
+		</div>
+    </div>
+{% endblock %}

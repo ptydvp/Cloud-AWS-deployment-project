@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	<style>
+		.img-fluid{
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+		}
+	</style>
+    {% comment %} <div class="container">
+        <h1>Let's Eat Ladkrabang</h1>
+        <h4>แนะนำร้านอาหารในละแวกสจล.</h4>
+        <br>
+        <div>
+            <form class="form-inline" method="GET">
+                    <div class="form-group">
+                        <label for="restaurant_search">ค้นหา:</label>
+                        <input type="text" class="form-control ml-3" id="restaurant_search" 
+                            name="restaurant_search" placeholder="ร้านอาหาร" value="{{restaurant_search}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary ml-3">ค้นหา</button>
+            </form>
+        </div>
+        <br>
+    </div> {% endcomment %}
+    <!-- Start Menu -->
+	<div class="menu-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>ร้านอาหารแนะนำในละแวกสจล.</h2>
+						<p>นี่คือร้านอาหารทั้งหมดที่เรามีแนะนำ เลือกเลย!</p>
+					</div>
+					<form class="form-inline" method="GET">
+						<div class="blog-search-form">
+							<label for="search_restaurant">ค้นหา:</label>
+							<input type="text" class="form-control ml-3" id="search_restaurant" 
+								name="search_restaurant" placeholder="ชื่อร้าน">
+							<button type="submit" class="search-btn">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+                    	
+            		</form>
+				</div>
+			</div>
+			
+			
+			<div class="row inner-menu-box">
+				<div class="col-3">
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="{% url "index" %}" role="tab" aria-controls="v-pills-home" aria-selected="true">ร้านทั้งหมด</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="{% url "index_type" type_id=1 %}" role="tab" aria-controls="v-pills-profile" aria-selected="false">บุฟเฟ่ต์</a>
+						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="{% url "index_type" type_id=2 %}" role="tab" aria-controls="v-pills-messages" aria-selected="false">ตามสั่ง</a>
+						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="{% url "index_type" type_id=3 %}" role="tab" aria-controls="v-pills-messages" aria-selected="false">ก๋วยเตี๋ยว</a>
+						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="{% url "index_type" type_id=4 %}" role="tab" aria-controls="v-pills-messages" aria-selected="false">ยำ/ส้มตำ</a>
+						<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="{% url "index_type" type_id=5 %}" role="tab" aria-controls="v-pills-settings" aria-selected="false">อาหารเกาหลี</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="{% url "index_type" type_id=6 %}" role="tab" aria-controls="v-pills-settings" aria-selected="false">อาหารญี่ปุ่น</a>
+						<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="{% url "index_type" type_id=8 %}" role="tab" aria-controls="v-pills-settings" aria-selected="false">สเต็ก/สปาเก็ตตี้</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="{% url "index_type" type_id=7 %}" role="tab" aria-controls="v-pills-settings" aria-selected="false">คาเฟ่</a>
+					</div>
+				</div>
+				
+				<div class="col-9">
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="row">
+							{% if resinfo.count == 0 %}
+								<p class="text-danger">ไม่เจอนะจ๊ะ</p>
+							{% else %}							
+								{% for rt in resinfo %}
+								<div class="col-lg-4 col-md-6 special-grid drinks">									
+									<div class="gallery-single fix">
+										<img src="{{ rt.picture.url }}" class="img-fluid" alt="Image">
+										<div class="why-text">
+											<h4>{{ rt.restaurant_name }}</h4>
+											<p>{{ rt.desc }}</p>
+											<h5><a href="{% url "detail" rt.id %}">
+                                    				ดูรายละเอียด
+                                				</a>
+											</h5>
+										</div>
+									</div>			
+								</div>
+								{% endfor %}
+							{% endif %}	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Menu -->
+{% endblock %}
+
+

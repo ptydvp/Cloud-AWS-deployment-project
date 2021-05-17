@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% comment %} <title>Let's Eat Ladkrabang</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> {% endcomment %}
+     <!-- Site Metas -->
+    <title>Let's Eat Ladkrabang</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">    
+	<!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/style.css' %}">    
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/custom.css' %}">
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+    {% comment %} 
+    header[role="banner"] {
+            #logo-main {
+                display: block;
+                margin: 20px auto;
+            }
+        }
+
+        #navbar-primary.navbar-default {
+        background: transparent;
+        border: none;
+        .navbar-nav { 
+            width: 100%;
+            text-align: center;
+            > li {
+            display: inline-block;
+            float: none;
+            > a {
+                padding-left: 30px;
+                padding-right: 30px;
+                }
+            }
+        }
+        }
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+        position: relative;
+        min-height: 100%;
+        }
+        {% endcomment %}
+        body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+        font-family: 'Kanit', sans-serif;
+        {% comment %} }
+        .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        line-height: 60px; /* Vertically center the text there */
+        background-color: #f5f5f5;
+        }  {% endcomment %}
+    </style>
+
+</head>
+
+
+<body>
+
+{% comment %} <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Let'sEatLadkrabang</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class=""><a href="{% url 'index' %}">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Page 2</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+        {% block footer %}
+        {% endblock %}
+        </span>
+      </div>
+    </footer> {% endcomment %}
+  <header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="{% url 'index' %}">
+					<img src="{% static 'base/images/logo2.png' %}" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="{% url 'index' %}">หน้าหลัก</a></li>
+            {% if user.is_authenticated %}
+              {% if request.user.groups.all.0.name == "store" %}
+						    <li class="nav-item"><a class="nav-link" href="{% url 'Management' %}">จัดการร้านอาหาร</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'show_reservation' %}">คำจองทั้งหมด</a></li>
+              {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'show_cus_reservation' %}">คำจองของคุณ</a></li>
+              {% endif %}
+            {% endif %}
+						{% comment %} <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="{% url 'index' %}">Reservation</a>
+								<a class="dropdown-item" href="{% url 'index' %}">Stuff</a>
+								<a class="dropdown-item" href="{% url 'index' %}">Gallery</a>
+							</div>
+						</li> {% endcomment %}
+						{% comment %} <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="blog.html">blog</a>
+								<a class="dropdown-item" href="blog-details.html">blog Single</a>
+							</div>
+						</li> {% endcomment %}
+            {% if user.is_authenticated %}
+              
+						<li class="nav-item"><a class="nav-link" href="{% url 'Profile' %}">โปรไฟล์</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ออกจากระบบ</a></li>
+            {% else %}
+						<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">เข้าสู่ระบบ</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">สมัครสมาชิก</a></li>
+            {% endif %}
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+  </header>
+        <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+        {% block footer %}
+        {% endblock %}
+        </span>
+      </div>
+    </footer>
+
+
+
+</body>
+</html>

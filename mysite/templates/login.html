@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+     <div class="container">
+        <br/><br/>
+        <div align="center">
+        <a class="navbar-brand" href="{% url 'index' %}">
+					<img src="{% static 'base/images/logo3.png' %}" alt="" />
+				</a>
+        </div>
+        <br/>
+        <div align="center">
+        {% for message in messages %}
+            <h6> {{message}} </h6>
+        {% endfor %}
+        </div>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control ml-3" id="username" 
+                    name="username" value="{{username}}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control ml-3" id="password" name="password" value="{{password}}">
+                <div class="form-group"><p><p><input type="checkbox" onclick="myFunction()"> Show Password</div>
+                <script> function myFunction() {
+                        var x = document.getElementById("password");
+                        if (x.type === "password") {
+                        x.type = "text";
+                        } else { x.type = "password";}} </script>
+            </div>
+            
+            <button type="submit" class="btn btn-warning btn-lg btn-block">Login</button>
+        </form>
+        <br/><br/>
+    </div> 
+    
+{% endblock %}

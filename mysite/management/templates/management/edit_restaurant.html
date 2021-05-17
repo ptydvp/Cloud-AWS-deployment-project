@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+    <br>
+    <div class="container jumbotron">
+        <h1>แก้ไขข้อมูลร้านอาหาร</h1>
+        <br/>
+        {% comment %} {% if Type.id %}
+            <!-- Submit to class_update view -->
+            <form method="POST" action="{% url 'managementType' %}" enctype="multipart/form-data">
+        {% else %}
+            <!-- Submit to class_add view --> {% endcomment %}
+        <form method="POST" action="{% url 'Restaurant_edit' restauranted.id%}" enctype="multipart/form-data" >
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">ชื่อร้านอาหาร:</label>
+                    <input type="text" class="form-control " name="restaurant_name" id="restaurant_name" value="{{restauranted.restaurant_name}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">เบอร์ติดต่อ:</label>
+                    <input type="text" class="form-control" name="seller_phone" id="seller_phone" value="{{restaurantned.seller_phone}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">คำอธิบาย:</label>
+                    <textarea type="text" class="form-control" name="desc" id="desc" value="{{restaurantned.desc}}" required></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="name">ประเภท:</label>
+                        <select id="restaurant_type_id" name="restaurant_type_id">
+                                {% for rest in res_type %}
+                                <option value="{{ rest.id }}" {% if restauranted.restaurant_type_id.type_name == rest.type_name%}selected{% endif %}>{{ rest.type_name }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">ที่อยู่ร้าน:</label>
+                    <textarea type="text" class="form-control" name="location_address" id="location_address" value="{{restauranted.location_address}}" required></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">รูปภาพ:</label>
+                    <input type="file" name="picture" id="picture" value="{{restauranted.picture}}" accept="image/*" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">สถานะร้านค้า:</label>
+                    <select name="restaurant_status" id="restaurant_status">
+                            <option value="OP">open</option>
+                            <option value="CL">close</option>
+                    </select>
+                </div>
+            </div>
+            {% csrf_token %}
+            {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+            <button type="submit" class="btn btn-primary ml-3">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
