@@ -25,9 +25,24 @@ SECRET_KEY = 'g)to(z&px$v!yqxjthmcp09w96v$!l_8ya%xp(ahv0e!kp_77k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#EC2
-ALLOWED_HOSTS = ['35.153.131.216']
+#EC2-safereserve - 1
+# ALLOWED_HOSTS = ['35.153.131.216']
 
+#EC2-safereserve - 2
+# ALLOWED_HOSTS = ['']
+
+ALLOWED_HOSTS = []
+
+
+#S3 BCUKETS CONFIG
+AWS_ACCESS_KEY_ID = ''
+AWS_SECERT_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = 'safereserve-bucket'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAUTL_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 # Application definition
 
@@ -46,6 +61,8 @@ INSTALLED_APPS = [
     'myprofile.apps.MyprofileConfig',
     'reservations',
     'myreview',
+
+    'storage',
 ]
 
 MIDDLEWARE = [
@@ -144,14 +161,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-#S3 BCUKETS CONFIG
-# AWS_ACCESS_KEY_ID = ''
-# AWS_SECERT_ACCESS_KEY = ''
-# AWS_STORAGE_BUCKET_NAME = 'safereserve-bucket'
-
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAUTL_ACL = None
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
