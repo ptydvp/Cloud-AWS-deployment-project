@@ -46,4 +46,4 @@ urlpatterns = [
     path('reser_accepted/<int:reservation_id>', views6.res_reservation_accepted, name='reservation_accepted'),
     path('reser_rejected/<int:reservation_id>', views6.res_reservation_rejected, name='reservation_rejected'),
     path('reser_cancel/<int:reservation_id>', views6.res_reservation_cancel, name='reservation_cancel'),
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
